@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class CorsAspect {
 	
 	@AfterReturning(pointcut = "execution(* ar.edu.unq.tip.grupo6.app.webservice.endpoint..*(..))", returning= "result")
-	public void alrededor(JoinPoint joinPoint, Object result) {
+	public void corsResolve(JoinPoint joinPoint, Object result) {
 		Response response = (Response) result;
 		response.getHeaders().add("Access-Control-Allow-Origin", "*");
         response.getHeaders().add("Access-Control-Allow-Headers",

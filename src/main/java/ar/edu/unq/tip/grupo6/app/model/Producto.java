@@ -8,23 +8,25 @@ import lombok.Setter;
 @Getter @Setter
 public class Producto {
 	
+	Integer id;
 	String nombre;
 	Float precio;
-	String image;
+	String imagen;
 	Integer cantidad;
 	
-	public Producto(String nombre, Float precio, String image) {
-		setAllArgs(nombre, precio, image, 1);
+	public Producto(Integer id, String nombre, Float precio, String imagen) {
+		setAllArgs(id, nombre, precio, imagen, 1);
 	}
 	
-	public Producto(String nombre, Float precio, String image, Integer cantidad) {
-		setAllArgs(nombre, precio, image, cantidad);
+	public Producto(Integer id, String nombre, Float precio, String imagen, Integer cantidad) {
+		setAllArgs(id, nombre, precio, imagen, cantidad);
 	}
 	
-	private void setAllArgs(String nombre, Float precio, String image, Integer cantidad) {
+	private void setAllArgs(Integer id, String nombre, Float precio, String imagen, Integer cantidad) {
+		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.image = image;
+		this.imagen = imagen;
 		this.cantidad = cantidad;
 	}
 

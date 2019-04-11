@@ -6,14 +6,16 @@ import lombok.Getter;
 @Getter
 public class ProductoDTO {
 	
+	Integer id;
 	String nombre;
 	Float precio;
-	String image;
+	String imagen;
 	
 	public ProductoDTO(Producto producto) {
+		id = producto.getId();
 		nombre = producto.getNombre();
 		precio = producto.getPrecio();
-		image = producto.getImage();
+		imagen = producto.getImagen();
 	}
 	
 }

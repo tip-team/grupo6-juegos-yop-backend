@@ -13,13 +13,14 @@ import ar.edu.unq.tip.grupo6.app.service.ProductoService;
 import ar.edu.unq.tip.grupo6.app.webservice.dto.ProductoDTO;
 
 @Component
-@Path("/productos")
+@Path("/")
 public class ProductoRest extends Rest {
 	
 	@Autowired
 	private ProductoService productoService;
 	
 	@GET
+	@Path("/productos")
 	@Produces(APPLICATION_JSON)
 	public Response getAllProductos() {
 		return ok(productoService.getProductos().stream().map(ProductoDTO::new));
