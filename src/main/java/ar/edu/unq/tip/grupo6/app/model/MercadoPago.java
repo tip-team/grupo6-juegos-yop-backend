@@ -7,12 +7,14 @@ import com.mercadopago.resources.datastructures.preference.BackUrls;
 import com.mercadopago.resources.datastructures.preference.Item;
 import com.mercadopago.resources.datastructures.preference.Payer;
 
+import ar.edu.unq.tip.grupo6.app.model.util.StringUtil;
+
 public class MercadoPago {
 	
 	public static String getPaymentUrl(Producto producto) throws MPException {
 		Item item = new Item()
 				.setId(String.valueOf(producto.getId()))
-				.setTitle(producto.getNombre())
+				.setTitle(StringUtil.encodeText(producto.getNombre()))
 				.setQuantity(producto.getCantidad())
 				.setUnitPrice(producto.getPrecio());
 
