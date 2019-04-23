@@ -28,4 +28,8 @@ public class ProductoService {
 		return productoRepository.save(producto);
 	}
 
+	public void borrarProducto(Integer id) {
+		productoRepository.deleteById(id);
+	}
+
 }
