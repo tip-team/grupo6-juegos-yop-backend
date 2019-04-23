@@ -24,7 +24,7 @@ public class MercadoPago {
 					.setBackUrls((new BackUrls()).setSuccess("https://tip-juegos-yop.herokuapp.com"))
 					.setAutoReturn(AutoReturn.approved)
 					.save()
-					.getInitPoint();
+					.getSandboxInitPoint();
 	}
 
 }
