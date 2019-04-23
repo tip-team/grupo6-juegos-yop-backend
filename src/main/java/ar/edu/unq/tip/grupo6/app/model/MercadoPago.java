@@ -25,7 +25,7 @@ public class MercadoPago {
 					.setAutoReturn(AutoReturn.approved)
 					.setNotificationUrl("https://test-tip-backend.herokuapp.com/api/mp/notifications")
 					.save()
-					.getSandboxInitPoint();
+					.getInitPoint();
 	}
 
 }
