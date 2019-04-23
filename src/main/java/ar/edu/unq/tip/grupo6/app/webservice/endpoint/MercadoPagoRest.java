@@ -69,7 +69,7 @@ public class MercadoPagoRest extends Rest {
 		String urlPago = getUrlPago(idProducto);
 		return ok(json -> json.add("urlPago", urlPago));
 	}
-	
+	/*
 	@POST
 	@Path("/notifications")
 	@Consumes(APPLICATION_JSON)
@@ -81,6 +81,6 @@ public class MercadoPagoRest extends Rest {
 		logger.info("Recibi una notificacion");
 		return ok();
 	}
-
+*/
 
 }
