@@ -1,16 +1,23 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mercadopago.MercadoPago;
 import com.mercadopago.exceptions.MPConfException;
 import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.MerchantOrder;
+import com.mercadopago.resources.Payment;
+
 import ar.edu.unq.tip.grupo6.app.service.MercadoPagoService;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 import ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader;
@@ -59,5 +66,17 @@ public class MercadoPagoRest extends Rest {
 		String urlPago = getUrlPago(idProducto);
 		return ok(json -> json.add("urlPago", urlPago));
 	}
+	
+	@POST
+	@Path("/notifications")
+	@Consumes(APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
+	public Response getNotification(@QueryParam("id") String id,@QueryParam("type") String type) throws MPException {
+		Payment payment = Payment.findById(id);
+		MerchantOrder merchantOrder = MerchantOrder.findById(payment.getId());
+
+		return ok();
+	}
+
 
 }
