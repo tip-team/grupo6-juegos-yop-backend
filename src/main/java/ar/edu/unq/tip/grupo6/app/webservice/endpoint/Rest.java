@@ -1,22 +1,27 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
 import java.util.Optional;
 import java.util.function.Function;
+
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.NotFoundException;
 import ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import lombok.Getter;
 
 public abstract class Rest {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Getter Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@OPTIONS
 	@Path("{var:.+}" )

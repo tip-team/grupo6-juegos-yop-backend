@@ -1,9 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,12 +9,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
+import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
 import ar.edu.unq.tip.grupo6.app.webservice.dto.ProductoDTO;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 
@@ -45,22 +41,11 @@ public class ProductoRest extends Rest {
 	}
 	
 	@DELETE
-	@Path("/borrarProducto/{id}")
-	@Consumes(APPLICATION_JSON)
+	@BadRequestId(message = "eliminar un producto")
+	@Path("/producto/{id}")
 	@Produces(APPLICATION_JSON)
 	public Response borrarProducto(@PathParam("id") String id) throws BadRequestException {
-		if(id == null || id.isEmpty()) {
-			badRequest("Para eliminar un producto el id debe estar definido.");
-		}
-		
-		Integer idProducto = null;
-		try{
-			idProducto = Integer.valueOf(id);
-		} catch(NumberFormatException numberException) {
-			badRequest("Para eliminar un producto el id debe ser un numero entero.");
-		}
-		
-		productoService.borrarProducto(idProducto);
+		productoService.borrarProducto(Integer.valueOf(id));
 		return ok();
 	}
 	

@@ -6,7 +6,6 @@ import com.mercadopago.resources.Preference.AutoReturn;
 import com.mercadopago.resources.datastructures.preference.BackUrls;
 import com.mercadopago.resources.datastructures.preference.Item;
 import com.mercadopago.resources.datastructures.preference.Payer;
-
 import ar.edu.unq.tip.grupo6.app.model.util.StringUtil;
 
 public class MercadoPago {
@@ -15,7 +14,7 @@ public class MercadoPago {
 		Item item = new Item()
 				.setId(String.valueOf(producto.getId()))
 				.setTitle(StringUtil.encodeText(producto.getNombre()))
-				.setQuantity(producto.getCantidad())
+				.setQuantity(1)
 				.setUnitPrice(producto.getPrecio());
 
 		return (new Preference())
