@@ -60,7 +60,7 @@ public class MercadoPagoRest extends Rest {
 	@Path("/notifications")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
-	public Response getNotification(@QueryParam("id") String id,@QueryParam("type") String type) throws MPException {
+	public Response getNotification(@QueryParam("id") String id, @QueryParam("type") String type) throws MPException {
 		//Payment payment = Payment.findById(id);
 		//MerchantOrder merchantOrder = MerchantOrder.findById(payment.getId());
 		Logger logger = LoggerFactory.getLogger(MercadoPagoRest.class);

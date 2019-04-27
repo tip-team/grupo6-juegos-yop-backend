@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
+import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
 import ar.edu.unq.tip.grupo6.app.webservice.dto.ProductoDTO;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
@@ -32,7 +33,7 @@ public class ProductoRest extends Rest {
 	}
 	
 	@POST
-	@Path("/crearProducto")
+	@Path("/productos")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
 	public Response crearProducto(Producto producto) {
@@ -42,10 +43,14 @@ public class ProductoRest extends Rest {
 	
 	@DELETE
 	@BadRequestId(message = "eliminar un producto")
-	@Path("/producto/{id}")
+	@Path("/productos/{id}")
 	@Produces(APPLICATION_JSON)
 	public Response borrarProducto(@PathParam("id") String id) throws BadRequestException {
-		productoService.borrarProducto(Integer.valueOf(id));
+		try {
+			productoService.borrarProducto(Integer.valueOf(id));
+		} catch (ProductoInexistenteException exception) {
+			badRequest(exception.getMessage());
+		}
 		return ok();
 	}
 	

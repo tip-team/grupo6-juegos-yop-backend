@@ -17,7 +17,7 @@ import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 
 @Aspect
 @Component
-public class BadRequestAspect {
+public class BadRequestIdAspect {
 
 	@Around(value = "@annotation(ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId)")
 	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
