@@ -15,7 +15,6 @@ import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
-import ar.edu.unq.tip.grupo6.app.webservice.dto.ProductoDTO;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 
 @Component
@@ -29,7 +28,7 @@ public class ProductoRest extends Rest {
 	@Path("/productos")
 	@Produces(APPLICATION_JSON)
 	public Response getAllProductos() {
-		return ok(productoService.getProductos().stream().map(ProductoDTO::new));
+		return ok(productoService.getProductos());
 	}
 	
 	@POST
