@@ -22,7 +22,7 @@ public class ConfigurationLoader {
 	}
 	
 	private static String getAccessToken() {
-		String accessToken = "MERCADOPAGO_ACCESS_TOKEN";
+		String accessToken = MERCADO_PAGO_ACCESS_TOKEN;
 		return Optional.ofNullable(PROPERTIES.getProperty(accessToken)).orElseThrow(() -> new RuntimeException("No se encontro la property '" + accessToken + "' en el archivo '" + CONFIGURATION_FILE + "'."));
 	}
 
