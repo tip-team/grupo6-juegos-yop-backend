@@ -33,6 +33,11 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 
+	public void updateProducto(String id, @Valid Producto producto) {
+		producto.setId(Integer.valueOf(id));
+		productoRepository.save(producto);
+	}
+	
 	public void borrarProducto(Integer id) throws ProductoInexistenteException {
 		try {
 			productoRepository.deleteById(id);

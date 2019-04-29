@@ -40,6 +40,15 @@ public class ProductoRest extends Rest {
 		return ok();
 	}
 	
+	@POST
+	@Path("/productos/{id}")
+	@Consumes(APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
+	public Response updateProducto(@PathParam("id") String id, Producto producto) {
+		productoService.updateProducto(id,producto);
+		return ok();
+	}
+	
 	@DELETE
 	@BadRequestId(message = "eliminar un producto")
 	@Path("/productos/{id}")
