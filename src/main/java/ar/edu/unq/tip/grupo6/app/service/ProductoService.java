@@ -37,13 +37,21 @@ public class ProductoService {
 		producto.setId(Integer.valueOf(id));
 		productoRepository.save(producto);
 	}
-	
+
 	public void borrarProducto(Integer id) throws ProductoInexistenteException {
 		try {
 			productoRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException exception) {
 			throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
 		}
+	}
+
+	public Producto getProducto(String id) throws ProductoInexistenteException {
+		Optional<Producto> productoFounded = productoRepository.findById(Integer.valueOf(id));
+		if (productoFounded.isPresent()) {
+			return productoFounded.get();
+		}
+		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
 	}
 
 }
