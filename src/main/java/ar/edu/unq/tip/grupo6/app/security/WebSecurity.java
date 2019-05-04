@@ -1,9 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.security;
 
 import static ar.edu.unq.tip.grupo6.app.security.Constants.*;
-
-import javax.servlet.Filter;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,9 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.ForbiddenExceptionHandler;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -48,6 +47,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests().antMatchers(HttpMethod.GET, "/api/productos").permitAll()
 			.anyRequest().authenticated().and()
+			.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
 			.addFilter(authenticationFilter)
 			.addFilter(authorizationFilter);
 	}
@@ -64,4 +64,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
 	}
+	
+	@Bean
+    public AuthenticationEntryPoint authenticationEntryPoint(){
+        return new ForbiddenExceptionHandler();
+    }
+	
 }
