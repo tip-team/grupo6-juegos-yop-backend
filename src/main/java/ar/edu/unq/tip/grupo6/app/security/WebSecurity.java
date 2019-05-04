@@ -44,10 +44,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 */
 		httpSecurity
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.cors().and()
+			.cors().disable()
 			.csrf().disable()
-			.authorizeRequests().antMatchers(HttpMethod.GET, "/api/productos").permitAll().and()
-			.authorizeRequests().antMatchers(HttpMethod.POST, "/auth/token").permitAll()
+			.authorizeRequests().antMatchers(HttpMethod.GET, "/api/productos").permitAll()
+			//.authorizeRequests().antMatchers(HttpMethod.POST, "/auth/token").permitAll()
 			.anyRequest().authenticated().and()
 			.addFilter(authenticationFilter)
 			.addFilter(authorizationFilter);
