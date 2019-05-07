@@ -1,6 +1,9 @@
 package ar.edu.unq.tip.grupo6.app.security;
 
 import static ar.edu.unq.tip.grupo6.app.security.Constants.*;
+
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -63,6 +66,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		final CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
 		config.addExposedHeader(HEADER_AUTHORIZACION_KEY);
+		config.setAllowedOrigins(Arrays.asList("*"));
+		config.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
 		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
