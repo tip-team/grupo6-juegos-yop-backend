@@ -26,7 +26,7 @@ public class MercadoPagoService {
 	public void savePayment(String id) throws MPException {
 		Payment payment = Payment.findById(id);
 		Logger logger = LoggerFactory.getLogger(MercadoPagoService.class);
-		logger.info("PAYMENT ID: ", payment.getId());
+		logger.info("PAYMENT ID: " + id);
 		logger.info("PAYMENT DESCRIPTION: " + payment.getDescription());
 		logger.info("PAYMENT STATUS: " + payment.getStatus());
 		logger.info("PAYMENT STATUS DETAIL: " + payment.getStatusDetail());

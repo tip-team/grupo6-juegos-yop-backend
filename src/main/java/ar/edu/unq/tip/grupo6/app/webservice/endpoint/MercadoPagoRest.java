@@ -58,7 +58,7 @@ public class MercadoPagoRest extends Rest {
 	@Path("/notifications")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
-	public Response getNotification(@QueryParam("id") String id, @QueryParam("type") String type) throws MPException {
+	public Response getNotification(@QueryParam("data.id") String id, @QueryParam("type") String type) throws MPException {
 		mercadoPagoService.savePayment(id);
 		return ok();
 	}
