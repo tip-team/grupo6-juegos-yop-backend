@@ -1,6 +1,9 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import java.util.Optional;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -58,8 +61,9 @@ public class MercadoPagoRest extends Rest {
 	@Path("/notifications")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
-	public Response getNotification(@QueryParam("data.id") String id, @QueryParam("type") String type) throws MPException {
-		mercadoPagoService.savePayment(id);
+	public Response getNotification(@QueryParam("data.id") String dataId, @QueryParam("type") String type, @QueryParam("id") String id) throws MPException {
+		String idString = Optional.of(dataId).orElse(id);
+		mercadoPagoService.savePayment(idString);
 		return ok();
 	}
 
