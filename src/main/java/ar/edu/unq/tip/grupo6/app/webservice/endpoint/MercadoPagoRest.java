@@ -63,7 +63,7 @@ public class MercadoPagoRest extends Rest {
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
 	public Response getNotification(@QueryParam("data.id") String dataId, @QueryParam("type") String type, @QueryParam("id") String id) throws MPException {
-		Optional.of(type).ifPresent(paymentType -> {
+		Optional.ofNullable(type).ifPresent(paymentType -> {
 			String idString = Optional.ofNullable(dataId).orElse(id);
 			try {
 				mercadoPagoService.savePayment(idString);
