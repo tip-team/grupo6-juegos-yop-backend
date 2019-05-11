@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import ar.edu.unq.tip.grupo6.app.model.Usuario;
 import ar.edu.unq.tip.grupo6.app.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -25,4 +24,5 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
 		}
 		return new User(usuario.getUsername(), usuario.getPassword(), emptyList());
 	}
+	
 }

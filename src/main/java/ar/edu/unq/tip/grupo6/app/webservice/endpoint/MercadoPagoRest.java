@@ -9,8 +9,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mercadopago.MercadoPago;
@@ -61,10 +59,7 @@ public class MercadoPagoRest extends Rest {
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
 	public Response getNotification(@QueryParam("id") String id, @QueryParam("type") String type) throws MPException {
-		//Payment payment = Payment.findById(id);
-		//MerchantOrder merchantOrder = MerchantOrder.findById(payment.getId());
-		Logger logger = LoggerFactory.getLogger(MercadoPagoRest.class);
-		logger.info("Recibi una notificacion");
+		mercadoPagoService.savePayment(id);
 		return ok();
 	}
 
