@@ -23,6 +23,7 @@ import ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader;
 import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.NotFoundException;
+import lombok.SneakyThrows;
 
 @Component
 @Path("/mp")
@@ -62,9 +63,20 @@ public class MercadoPagoRest extends Rest {
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
 	public Response getNotification(@QueryParam("data.id") String dataId, @QueryParam("type") String type, @QueryParam("id") String id) throws MPException {
-		String idString = Optional.ofNullable(dataId).orElse(id);
-		mercadoPagoService.savePayment(idString);
+		Optional.of(type).ifPresent(paymentType -> {
+			String idString = Optional.ofNullable(dataId).orElse(id);
+			try {
+				mercadoPagoService.savePayment(idString);
+			} catch (MPException e) {
+				lanzarExcepcionMercadoPago(new BadRequestException("El id de compra de Mercado Pago es inexistente.", logger));
+			}
+		});
 		return ok();
+	}
+	
+	@SneakyThrows
+	private void lanzarExcepcionMercadoPago(BadRequestException exception) {
+		throw exception;
 	}
 
 }
