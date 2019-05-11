@@ -26,8 +26,9 @@ public class Producto {
 	@NotNull(message="El precio debe estar definido.")
 	Float precio;
 	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@NotNull(message = "La imágen debe estar definida.")
-	@Size(min = 1, message = "La imágen debe estar definida.")
+    @Size(min = 1, message = "La imágen debe estar definida.")
 	String imagen;
-
 }
