@@ -30,8 +30,8 @@ public class MercadoPagoService {
 		logger.info("PAYMENT DESCRIPTION: " + payment.getDescription());
 		logger.info("PAYMENT STATUS: " + payment.getStatus());
 		logger.info("PAYMENT STATUS DETAIL: " + payment.getStatusDetail());
-		logger.info("Valor cobrado: " + payment.getTransactionDetails().getTotalPaidAmount());
-		logger.info("Valor real con comision cobrada: " + payment.getTransactionDetails().getNetReceivedAmount());
+//		logger.info("Valor cobrado: " + payment.getTransactionDetails().getTotalPaidAmount());
+//		logger.info("Valor real con comision cobrada: " + payment.getTransactionDetails().getNetReceivedAmount());
 	}
 
 }
