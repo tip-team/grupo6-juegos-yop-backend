@@ -1,11 +1,13 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.Payment;
+
 import ar.edu.unq.tip.grupo6.app.model.MercadoPago;
 import ar.edu.unq.tip.grupo6.app.model.Pago;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
@@ -35,6 +37,10 @@ public class MercadoPagoService {
 				payment.getTransactionDetails().getNetReceivedAmount(),
 				payment.getStatus().name());
 		pagoRepository.save(pago);
+	}
+	
+	public List<Pago> getPagos() {
+		return pagoRepository.findAll();
 	}
 
 }

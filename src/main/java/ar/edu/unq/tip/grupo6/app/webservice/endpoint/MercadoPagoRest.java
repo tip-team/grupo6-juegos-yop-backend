@@ -23,6 +23,7 @@ import ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader;
 import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.NotFoundException;
+import ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils;
 import lombok.SneakyThrows;
 
 @Component
@@ -72,6 +73,13 @@ public class MercadoPagoRest extends Rest {
 			}
 		});
 		return ok();
+	}
+	
+	@GET
+	@Path("/pagos")
+	@Produces(APPLICATION_JSON)
+	public Response getPagos() {
+		return RestUtils.ok(mercadoPagoService.getPagos());
 	}
 	
 	@SneakyThrows
