@@ -17,18 +17,21 @@ public class Producto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
+	private Integer id;
 	
 	@NotNull(message = "El nombre debe estar definido.")
 	@Size(min = 1, message = "El nombre debe estar definido.")
-	String nombre;
+	private String nombre;
 	
 	@NotNull(message="El precio debe estar definido.")
-	Float precio;
+	private Float precio;
 	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@NotNull(message = "La imágen debe estar definida.")
     @Size(min = 1, message = "La imágen debe estar definida.")
-	String imagen;
+	private String imagen;
+	
+	@NotNull(message = "Se debe definir si el producto esta habilitado.")
+	private Boolean habilitado;
 }
