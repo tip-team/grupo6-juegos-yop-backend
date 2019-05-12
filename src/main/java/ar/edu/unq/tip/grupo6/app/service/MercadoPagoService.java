@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.MerchantOrder;
 import com.mercadopago.resources.Payment;
+import com.mercadopago.resources.Preference;
 
 import ar.edu.unq.tip.grupo6.app.model.MercadoPago;
 import ar.edu.unq.tip.grupo6.app.model.Pago;
@@ -35,6 +36,10 @@ public class MercadoPagoService {
 
 	public void savePayment(String id) throws MPException {
 		Payment payment = Payment.findById(id);
+		MerchantOrder merchantOrder = MerchantOrder.findById(payment.getOrder().getId().toString());
+		Preference preference = Preference.findById(merchantOrder.getPreferenceId());
+		Logger logger = LoggerFactory.getLogger(MercadoPagoService.class);
+		logger.info("Email: " + preference.getPayer().getEmail());
 		Pago pago = new Pago(id, payment.getDescription(), 
 				payment.getTransactionDetails().getTotalPaidAmount(), 
 				payment.getTransactionDetails().getNetReceivedAmount(),

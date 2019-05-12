@@ -26,8 +26,6 @@ public class MercadoPago {
 				.setAutoReturn(AutoReturn.approved)
 				.setNotificationUrl("https://tip-juegos-yop-backend.herokuapp.com/api/mp/notifications")
 				.save();
-		Logger logger = LoggerFactory.getLogger(MercadoPago.class);
-		logger.info("Preference id: " + preference.getId());
 		return preference.getInitPoint();
 	}
 
