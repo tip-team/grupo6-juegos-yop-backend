@@ -1,17 +1,12 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.MerchantOrder;
 import com.mercadopago.resources.Payment;
 import com.mercadopago.resources.Preference;
-
 import ar.edu.unq.tip.grupo6.app.model.MercadoPago;
 import ar.edu.unq.tip.grupo6.app.model.Pago;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
@@ -28,22 +23,21 @@ public class MercadoPagoService {
 	@Autowired
 	private PagoRepository pagoRepository;
 
-	public String getPaymentUrl(Integer productoId) throws MPException, ProductoInexistenteException {
+	public String getPaymentUrl(Integer productoId, String email) throws MPException, ProductoInexistenteException {
 		Producto producto = productoRepository.findById(productoId).orElseThrow(
 				() -> new ProductoInexistenteException("El producto con id '" + productoId + "' es inexistente."));
-		return MercadoPago.getPaymentUrl(producto);
+		return MercadoPago.getPaymentUrl(producto, email);
 	}
 
 	public void savePayment(String id) throws MPException {
 		Payment payment = Payment.findById(id);
 		MerchantOrder merchantOrder = MerchantOrder.findById(payment.getOrder().getId().toString());
 		Preference preference = Preference.findById(merchantOrder.getPreferenceId());
-		Logger logger = LoggerFactory.getLogger(MercadoPagoService.class);
-		logger.info("Email: " + preference.getPayer().getEmail());
 		Pago pago = new Pago(id, payment.getDescription(), 
 				payment.getTransactionDetails().getTotalPaidAmount(), 
 				payment.getTransactionDetails().getNetReceivedAmount(),
-				payment.getStatus().name());
+				payment.getStatus().name(),
+				preference.getPayer().getEmail());
 		pagoRepository.save(pago);
 	}
 	

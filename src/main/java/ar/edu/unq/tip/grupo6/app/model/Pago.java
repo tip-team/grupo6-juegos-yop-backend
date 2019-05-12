@@ -22,8 +22,9 @@ public class Pago {
 	Float montoRecibido;
 	String estadoDePago;
 	String fecha;
+	String email;
 	
-	public Pago(String idCompra, String nombreProducto, Float monto, Float montoRecibido, String estadoDePago) {
+	public Pago(String idCompra, String nombreProducto, Float monto, Float montoRecibido, String estadoDePago, String email) {
 		this.idCompra = idCompra;
 		this.nombreProducto = nombreProducto;
 		this.monto = monto;
@@ -33,6 +34,7 @@ public class Pago {
 		ZonedDateTime fechaArgentina = fecha.withZoneSameInstant(ZoneId.of("America/Argentina/Buenos_Aires"));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		this.fecha = fechaArgentina.format(formatter);
+		this.email = email;
 	}
 	
 }

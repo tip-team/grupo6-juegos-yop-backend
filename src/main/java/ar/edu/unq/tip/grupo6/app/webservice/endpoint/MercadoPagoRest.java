@@ -1,14 +1,11 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
 import java.util.Optional;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -39,10 +36,10 @@ public class MercadoPagoRest extends Rest {
 		MercadoPago.SDK.setAccessToken(ConfigurationLoader.MERCADO_PAGO_ACCESS_TOKEN);
 	}
 	
-	private String getUrlPago(Integer id) throws MPException, NotFoundException {
+	private String getUrlPago(Integer id, String email) throws MPException, NotFoundException {
 		String res = null;
 		try{
-			res = mercadoPagoService.getPaymentUrl(id);
+			res = mercadoPagoService.getPaymentUrl(id, email);
 		}
 		catch(ProductoInexistenteException productoInexistente) {
 			notFound(productoInexistente.getMessage());
@@ -52,10 +49,10 @@ public class MercadoPagoRest extends Rest {
 	
 	@GET
 	@BadRequestId(message = "obtener la url del pago")
-	@Path("/obtenerUrlPago/{id}")
+	@Path("/obtenerUrlPago")
 	@Produces(APPLICATION_JSON)
-	public Response getUrlPagoConChequeo(@PathParam("id") String id) throws MPException, NotFoundException, BadRequestException {
-		String urlPago = getUrlPago(Integer.valueOf(id));
+	public Response getUrlPagoConChequeo(@QueryParam("id") String id, @QueryParam("email") String email) throws MPException, NotFoundException, BadRequestException {
+		String urlPago = getUrlPago(Integer.valueOf(id), email);
 		return ok(json -> json.add("urlPago", urlPago));
 	}
 	
