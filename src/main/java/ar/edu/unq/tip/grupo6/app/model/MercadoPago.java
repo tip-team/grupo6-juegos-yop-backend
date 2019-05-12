@@ -18,7 +18,7 @@ public class MercadoPago {
 				.setUnitPrice(producto.getPrecio());
 
 		return (new Preference())
-					.setPayer(new Payer())
+					.setPayer((new Payer()).setEmail("facundoramos@gmail.com"))
 					.appendItem(item)
 					.setBackUrls((new BackUrls()).setSuccess("https://tip-juegos-yop.herokuapp.com"))
 					.setAutoReturn(AutoReturn.approved)

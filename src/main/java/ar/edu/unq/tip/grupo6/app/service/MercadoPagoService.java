@@ -2,6 +2,8 @@ package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +34,9 @@ public class MercadoPagoService {
 
 	public void savePayment(String id) throws MPException {
 		Payment payment = Payment.findById(id);
+		Logger logger = LoggerFactory.getLogger(this.getClass());
+		logger.info("Email payer: " + payment.getPayer().getEmail());
+		logger.info("Payment id: " + payment.getPaymentMethodId());
 		Pago pago = new Pago(id, payment.getDescription(), 
 				payment.getTransactionDetails().getTotalPaidAmount(), 
 				payment.getTransactionDetails().getNetReceivedAmount(),
