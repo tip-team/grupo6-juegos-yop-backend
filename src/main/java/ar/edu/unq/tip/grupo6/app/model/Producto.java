@@ -34,4 +34,5 @@ public class Producto {
 	
 	@NotNull(message = "Se debe definir si el producto esta habilitado.")
 	private Boolean habilitado;
+	
 }
