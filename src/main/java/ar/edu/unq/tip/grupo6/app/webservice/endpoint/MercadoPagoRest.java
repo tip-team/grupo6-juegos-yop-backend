@@ -65,6 +65,7 @@ public class MercadoPagoRest extends Rest {
 			String idString = Optional.ofNullable(dataId).orElse(id);
 			try {
 				mercadoPagoService.savePayment(idString);
+				logger.info("Entro a la notificacion con " + idString);
 			} catch (MPException e) {
 				lanzarExcepcionMercadoPago(new BadRequestException("El id de compra de Mercado Pago es inexistente.", logger));
 			}
