@@ -37,8 +37,8 @@ public class ProductoRest extends Rest {
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
 	public Response crearProducto(Producto producto) {
-		productoService.createProducto(producto);
-		return ok();
+		Integer productoId = productoService.createProducto(producto);
+		return ok(json -> json.add("id", productoId));
 	}
 	
 	@GET

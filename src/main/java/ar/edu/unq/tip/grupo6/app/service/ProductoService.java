@@ -29,8 +29,8 @@ public class ProductoService {
 		return Arrays.asList(productoFounded.get());
 	}
 
-	public void createProducto(@Valid Producto producto) {
-		productoRepository.save(producto);
+	public Integer createProducto(@Valid Producto producto) {
+		return productoRepository.save(producto).getId();
 	}
 
 	public void updateProducto(String id, @Valid Producto producto) {
