@@ -1,17 +1,20 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
@@ -50,11 +53,11 @@ public class ProductoRest extends Rest {
 	}
 	
 	@PUT
-	@Path("/productos/{id}")
+	@Path("/productos")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
-	public Response updateProducto(@PathParam("id") String id, Producto producto) {
-		productoService.updateProducto(id,producto);
+	public Response updateProducto(Producto producto) {
+		productoService.updateProducto(producto);
 		return ok();
 	}
 	

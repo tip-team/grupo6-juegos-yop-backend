@@ -22,7 +22,3 @@ public class ConstraintViolationExceptionHandler extends RestExceptionHandler im
 	}
 	
 }
-
-//public class ConstraintViolationExceptionHandler {
-//
-//}
