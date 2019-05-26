@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.MerchantOrder;
 import com.mercadopago.resources.Payment;
+import com.mercadopago.resources.Payment.Status;
 import com.mercadopago.resources.Preference;
 import com.mercadopago.resources.datastructures.payment.TransactionDetails;
 import com.mercadopago.resources.datastructures.preference.Payer;
@@ -44,7 +45,7 @@ public class MercadoPagoService {
 		Pago pago = new Pago(id, payment.getDescription(), 
 				transactionDetails.getTotalPaidAmount(), 
 				transactionDetails.getNetReceivedAmount(),
-				payment.getStatus().name(),
+				getEstado(payment.getStatus()),
 				payer.getEmail(),
 				payer.getPhone().getNumber(),
 				payer.getName());
@@ -53,6 +54,21 @@ public class MercadoPagoService {
 	
 	public List<Pago> getPagos() {
 		return pagoRepository.findAll();
+	}
+	
+	private String getEstado(Status status) {
+		switch(status) {
+			case approved: return "APROBADO";
+			case in_process: return "EN PROCESO";
+			case pending: return "PENDIENTE";
+			case cancelled: return "CANCELADO";
+			case authorized: return "AUTORIZADO";
+			case charged_back: return "REVERTIDO";
+			case in_mediation: return "EN MEDIACIÓN";
+			case refunded: return "REINTEGRADO";
+			case rejected: return "RECHAZADO";
+			default: return status.name();
+		}
 	}
 
 }
