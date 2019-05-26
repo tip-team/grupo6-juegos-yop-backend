@@ -1,5 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class MercadoPagoService {
 	@Autowired
 	private PagoRepository pagoRepository;
 
-	public String getPaymentUrl(Integer productoId, String email, String telefono, String nombre) throws MPException, ProductoInexistenteException {
+	public String getPaymentUrl(Integer productoId, String email, String telefono, String nombre) throws MPException, ProductoInexistenteException, UnsupportedEncodingException {
 		Producto producto = productoRepository.findById(productoId).orElseThrow(
 				() -> new ProductoInexistenteException("El producto con id '" + productoId + "' es inexistente."));
 		IntencionDePago intencionDePago = new IntencionDePago(productoId.toString(), email, telefono, nombre);
