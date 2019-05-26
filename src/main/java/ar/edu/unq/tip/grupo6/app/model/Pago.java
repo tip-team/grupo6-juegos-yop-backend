@@ -23,8 +23,10 @@ public class Pago {
 	String estadoDePago;
 	String fecha;
 	String email;
+	String telefono;
+	String nombre;
 	
-	public Pago(String idCompra, String nombreProducto, Float monto, Float montoRecibido, String estadoDePago, String email) {
+	public Pago(String idCompra, String nombreProducto, Float monto, Float montoRecibido, String estadoDePago, String email, String telefono, String nombre) {
 		this.idCompra = idCompra;
 		this.nombreProducto = nombreProducto;
 		this.monto = monto;
@@ -35,6 +37,8 @@ public class Pago {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		this.fecha = fechaArgentina.format(formatter);
 		this.email = email;
+		this.telefono = telefono;
+		this.nombre = nombre;
 	}
 	
 }

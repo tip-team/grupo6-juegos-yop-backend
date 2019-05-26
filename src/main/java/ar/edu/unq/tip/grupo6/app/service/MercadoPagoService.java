@@ -8,6 +8,8 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.MerchantOrder;
 import com.mercadopago.resources.Payment;
 import com.mercadopago.resources.Preference;
+import com.mercadopago.resources.datastructures.payment.TransactionDetails;
+import com.mercadopago.resources.datastructures.preference.Payer;
 import ar.edu.unq.tip.grupo6.app.model.IntencionDePago;
 import ar.edu.unq.tip.grupo6.app.model.MercadoPago;
 import ar.edu.unq.tip.grupo6.app.model.Pago;
@@ -37,11 +39,15 @@ public class MercadoPagoService {
 		Payment payment = Payment.findById(id);
 		MerchantOrder merchantOrder = MerchantOrder.findById(payment.getOrder().getId().toString());
 		Preference preference = Preference.findById(merchantOrder.getPreferenceId());
+		Payer payer = preference.getPayer();
+		TransactionDetails transactionDetails = payment.getTransactionDetails();
 		Pago pago = new Pago(id, payment.getDescription(), 
-				payment.getTransactionDetails().getTotalPaidAmount(), 
-				payment.getTransactionDetails().getNetReceivedAmount(),
+				transactionDetails.getTotalPaidAmount(), 
+				transactionDetails.getNetReceivedAmount(),
 				payment.getStatus().name(),
-				preference.getPayer().getEmail());
+				payer.getEmail(),
+				payer.getPhone().getNumber(),
+				payer.getName());
 		pagoRepository.save(pago);
 	}
 	
