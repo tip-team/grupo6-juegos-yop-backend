@@ -3,17 +3,10 @@ package ar.edu.unq.tip.grupo6.app.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.validation.Validation;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
-
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.repository.ProductoRepository;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
@@ -38,7 +31,7 @@ public class ProductoService {
 	}
 
 	public void updateProducto(@Valid Producto producto) {
-		validateConstraints(producto);
+		Validator.validate(producto);
 		productoRepository.save(producto);
 	}
 
@@ -58,11 +51,4 @@ public class ProductoService {
 		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
 	}
 
-    private static <T> void validateConstraints(T object) throws ConstraintViolationException {
-        Set<ConstraintViolation<T>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(object);
-        if(!violations.isEmpty()) {
-            throw new ConstraintViolationException(violations);
-        }
-
-    }
 }

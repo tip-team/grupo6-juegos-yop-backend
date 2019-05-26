@@ -6,18 +6,21 @@ import com.mercadopago.resources.Preference.AutoReturn;
 import com.mercadopago.resources.datastructures.preference.BackUrls;
 import com.mercadopago.resources.datastructures.preference.Item;
 import com.mercadopago.resources.datastructures.preference.Payer;
+import com.mercadopago.resources.datastructures.preference.Phone;
 import ar.edu.unq.tip.grupo6.app.model.util.StringUtil;
 
 public class MercadoPago {
 	
-	public static String getPaymentUrl(Producto producto, String email) throws MPException {
+	public static String getPaymentUrl(String nombreProducto, Float precioProducto, IntencionDePago intencionDePago) throws MPException {
 		Item item = new Item()
-				.setId(String.valueOf(producto.getId()))
-				.setTitle(StringUtil.encodeText(producto.getNombre()))
+				.setId(String.valueOf(intencionDePago.getId()))
+				.setTitle(StringUtil.encodeText(nombreProducto))
 				.setQuantity(1)
-				.setUnitPrice(producto.getPrecio());
+				.setUnitPrice(precioProducto);
+		Phone phone = new Phone();
+		phone.setNumber(intencionDePago.getTelefono());
 		Preference preference = (new Preference())
-				.setPayer((new Payer()).setEmail(email))
+				.setPayer((new Payer()).setEmail(intencionDePago.getEmail()).setPhone(phone).setName(intencionDePago.getNombre()))
 				.appendItem(item)
 				.setBackUrls((new BackUrls()).setSuccess("https://tip-juegos-yop.herokuapp.com"))
 				.setAutoReturn(AutoReturn.approved)

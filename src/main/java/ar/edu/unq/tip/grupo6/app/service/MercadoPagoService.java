@@ -7,6 +7,7 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.MerchantOrder;
 import com.mercadopago.resources.Payment;
 import com.mercadopago.resources.Preference;
+import ar.edu.unq.tip.grupo6.app.model.IntencionDePago;
 import ar.edu.unq.tip.grupo6.app.model.MercadoPago;
 import ar.edu.unq.tip.grupo6.app.model.Pago;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
@@ -23,10 +24,12 @@ public class MercadoPagoService {
 	@Autowired
 	private PagoRepository pagoRepository;
 
-	public String getPaymentUrl(Integer productoId, String email) throws MPException, ProductoInexistenteException {
+	public String getPaymentUrl(Integer productoId, String email, String telefono, String nombre) throws MPException, ProductoInexistenteException {
 		Producto producto = productoRepository.findById(productoId).orElseThrow(
 				() -> new ProductoInexistenteException("El producto con id '" + productoId + "' es inexistente."));
-		return MercadoPago.getPaymentUrl(producto, email);
+		IntencionDePago intencionDePago = new IntencionDePago(productoId.toString(), email, telefono, nombre);
+		Validator.validate(intencionDePago);
+		return MercadoPago.getPaymentUrl(producto.getNombre(), producto.getPrecio(), intencionDePago);
 	}
 
 	public void savePayment(String id) throws MPException {
