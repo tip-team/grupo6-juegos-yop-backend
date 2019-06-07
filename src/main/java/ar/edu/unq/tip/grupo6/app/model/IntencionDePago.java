@@ -1,7 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.model;
 
 import javax.validation.constraints.NotNull;
-
 import ar.edu.unq.tip.grupo6.app.model.validation.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

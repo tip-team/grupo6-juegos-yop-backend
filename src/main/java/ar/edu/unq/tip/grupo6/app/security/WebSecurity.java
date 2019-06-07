@@ -49,7 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests().antMatchers(HttpMethod.GET, "/api/productos", "/favicon.ico", "/api/productos/{\\d+}", "/api/mp/obtenerUrlPago").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/mp/notifications", "/api/email/send").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/mp/notifications", "/api/email").permitAll()
 			.anyRequest().authenticated().and()
 			.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
 			.addFilter(authenticationFilter)
