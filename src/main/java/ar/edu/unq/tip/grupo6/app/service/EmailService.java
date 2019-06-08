@@ -1,6 +1,8 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.concurrent.CompletableFuture;
+
+import com.sendgrid.Response;
 import org.springframework.stereotype.Component;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -23,21 +25,22 @@ public class EmailService {
 	    Content contenido = new Content("text/plain", mail.getCuerpo());
 	    Mail sendgridEmail = new Mail(remitente, mail.getAsunto(), destinatario, contenido);
 	    SendGrid sendgrid = new SendGrid(ConfigurationLoader.JUEGOS_YOP_EMAIL_API_KEY);
-	    Request request = new Request();
-	    request.setMethod(Method.POST);
-	    request.setEndpoint("mail/send");
-	    buildEmail(sendgridEmail);
-	    CompletableFuture.runAsync(() -> sendEmail(sendgrid, request));
+		Request request = buildEmail(sendgridEmail);
+		CompletableFuture.runAsync(() -> sendEmail(sendgrid, request));
 	}
-	
+
 	@SneakyThrows
 	private void sendEmail(SendGrid sendgrid, Request request) {
-		sendgrid.api(request);
+		Response response = sendgrid.api(request);
 	}
-	
+
 	@SneakyThrows
-	private void buildEmail(Mail sendgridEmail) {
-		sendgridEmail.build();
+	private Request buildEmail(Mail sendgridEmail) {
+		Request request = new Request();
+		request.setMethod(Method.POST);
+		request.setEndpoint("mail/send");
+		request.setBody(sendgridEmail.build());
+		return request;
 	}
 
 }
