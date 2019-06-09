@@ -4,6 +4,10 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,6 +20,8 @@ import org.springframework.stereotype.Component;
 import com.mercadopago.MercadoPago;
 import com.mercadopago.exceptions.MPConfException;
 import com.mercadopago.exceptions.MPException;
+
+import ar.edu.unq.tip.grupo6.app.model.Pago;
 import ar.edu.unq.tip.grupo6.app.service.MercadoPagoService;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 import ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader;
@@ -79,7 +85,9 @@ public class MercadoPagoRest extends Rest {
 	@Path("/pagos")
 	@Produces(APPLICATION_JSON)
 	public Response getPagos() {
-		return RestUtils.ok(mercadoPagoService.getPagos());
+		Function<Integer, Pago> getPago = id -> new Pago(String.valueOf(id), "Tobogán", 5500f, 5200f, "APROBADO", "Alan Marino", "+541153229125","marinoalanunq@gmail.com");
+		return RestUtils.ok(IntStream.range(0, 10000).mapToObj(getPago::apply).collect(Collectors.toList()));
+		//return RestUtils.ok(mercadoPagoService.getPagos());
 	}
 	
 	@SneakyThrows
