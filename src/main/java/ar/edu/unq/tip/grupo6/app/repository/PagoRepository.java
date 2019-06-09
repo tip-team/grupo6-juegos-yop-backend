@@ -9,6 +9,6 @@ import ar.edu.unq.tip.grupo6.app.model.Pago;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, String> {
 	
-	List<Pago> findByOrderByIdCompraDesc();
+	List<Pago> findTop2ByOrderByIdCompraDesc();
 	
 }
