@@ -21,7 +21,7 @@ public class Pago {
 	Float monto;
 	Float montoRecibido;
 	String estadoDePago;
-	String fecha;
+	ZonedDateTime fecha;
 	String email;
 	String telefono;
 	String nombre;
@@ -32,10 +32,11 @@ public class Pago {
 		this.monto = monto;
 		this.montoRecibido = montoRecibido;
 		this.estadoDePago = estadoDePago;
-		ZonedDateTime fecha = ZonedDateTime.now();
-		ZonedDateTime fechaArgentina = fecha.withZoneSameInstant(ZoneId.of("America/Argentina/Buenos_Aires"));
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		this.fecha = fechaArgentina.format(formatter);
+		this.fecha = ZonedDateTime.now();
+		//ZonedDateTime fecha = ZonedDateTime.now();
+		//ZonedDateTime fechaArgentina = fecha.withZoneSameInstant(ZoneId.of("America/Argentina/Buenos_Aires"));
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		//this.fecha = fechaArgentina.format(formatter);
 		this.email = email;
 		this.telefono = telefono;
 		this.nombre = nombre;

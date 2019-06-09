@@ -2,6 +2,8 @@ package ar.edu.unq.tip.grupo6.app.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.mercadopago.exceptions.MPException;
@@ -17,6 +19,7 @@ import ar.edu.unq.tip.grupo6.app.model.Pago;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.repository.PagoRepository;
 import ar.edu.unq.tip.grupo6.app.repository.ProductoRepository;
+import ar.edu.unq.tip.grupo6.app.service.dto.PagoDTO;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 
 @Component
@@ -52,8 +55,8 @@ public class MercadoPagoService {
 		pagoRepository.save(pago);
 	}
 	
-	public List<Pago> getPagos() {
-		return pagoRepository.findTop10000ByOrderByIdCompraDesc();
+	public List<PagoDTO> getPagos() {
+		return pagoRepository.findTop10000ByOrderByFechaDesc().stream().map(PagoDTO::new).collect(Collectors.toList());
 	}
 	
 	private String getEstado(Status status) {
