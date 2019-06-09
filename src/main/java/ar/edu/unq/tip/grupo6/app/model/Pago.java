@@ -1,8 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.model;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -33,10 +31,6 @@ public class Pago {
 		this.montoRecibido = montoRecibido;
 		this.estadoDePago = estadoDePago;
 		this.fecha = ZonedDateTime.now();
-		//ZonedDateTime fecha = ZonedDateTime.now();
-		//ZonedDateTime fechaArgentina = fecha.withZoneSameInstant(ZoneId.of("America/Argentina/Buenos_Aires"));
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		//this.fecha = fechaArgentina.format(formatter);
 		this.email = email;
 		this.telefono = telefono;
 		this.nombre = nombre;
