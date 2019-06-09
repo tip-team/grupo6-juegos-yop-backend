@@ -53,7 +53,7 @@ public class MercadoPagoService {
 	}
 	
 	public List<Pago> getPagos() {
-		return pagoRepository.findAll();
+		return pagoRepository.findByOrderByIdCompraDesc();
 	}
 	
 	private String getEstado(Status status) {
