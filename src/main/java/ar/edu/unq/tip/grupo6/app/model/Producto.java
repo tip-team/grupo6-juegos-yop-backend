@@ -33,7 +33,7 @@ public class Producto {
     @Size(min = 1, message = "La imágen debe estar definida.")
 	private String imagen;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@NotNull(message = "La imágen debe estar definida.")
