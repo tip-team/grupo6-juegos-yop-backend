@@ -1,5 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,14 @@ public class Producto {
 	@NotNull(message = "La imágen debe estar definida.")
     @Size(min = 1, message = "La imágen debe estar definida.")
 	private String imagen;
-	
+
+	@JsonIgnore
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@NotNull(message = "La imágen debe estar definida.")
+	@Size(min = 1, message = "La imágen debe estar definida.")
+	private String imagenDesc;
+
 	@NotNull(message = "Se debe definir si el producto esta habilitado.")
 	private Boolean habilitado;
 	

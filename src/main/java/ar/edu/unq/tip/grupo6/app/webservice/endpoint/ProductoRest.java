@@ -51,7 +51,16 @@ public class ProductoRest extends Rest {
 	public Response getProducto(@PathParam("id") String id) throws ProductoInexistenteException {
 		return ok(productoService.getProducto(id));
 	}
-	
+
+	@GET
+	@Path("/productos/desc/{id}")
+	@Consumes(APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
+	public Response getProductoDesc(@PathParam("id") String id) throws ProductoInexistenteException {
+		String imagen = productoService.getProductoDesc(id);
+		return ok(json -> json.add("imagenDesc", imagen));
+	}
+
 	@PUT
 	@Path("/productos")
 	@Consumes(APPLICATION_JSON)

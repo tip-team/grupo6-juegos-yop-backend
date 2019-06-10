@@ -3,6 +3,8 @@ package ar.edu.unq.tip.grupo6.app.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,4 +53,11 @@ public class ProductoService {
 		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
 	}
 
+	public String getProductoDesc(String id) throws ProductoInexistenteException {
+		Optional<Producto> productoFounded = productoRepository.findById(Integer.valueOf(id));
+		if (productoFounded.isPresent()) {
+			return productoFounded.get().getImagenDesc();
+		}
+		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
+	}
 }
