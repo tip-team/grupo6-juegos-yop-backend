@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,10 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(columnDefinition = "serial")
+	@Generated(GenerationTime.INSERT)
+	private Integer prioridad;
 	
 	@NotNull(message = "El nombre debe estar definido.")
 	@Size(min = 1, message = "El nombre debe estar definido.")

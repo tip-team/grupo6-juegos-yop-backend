@@ -1,7 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 import javax.ws.rs.Consumes;
@@ -38,23 +37,12 @@ public class MercadoPagoRest extends Rest {
 		MercadoPago.SDK.setAccessToken(ConfigurationLoader.MERCADO_PAGO_ACCESS_TOKEN);
 	}
 	
-	private String getUrlPago(Integer id, String email, String telefono, String nombre) throws MPException, NotFoundException, UnsupportedEncodingException {
-		String res = null;
-		try{
-			res = mercadoPagoService.getPaymentUrl(id, email, telefono, nombre);
-		}
-		catch(ProductoInexistenteException productoInexistente) {
-			notFound(productoInexistente.getMessage());
-		}
-		return res;
-	}
-	
 	@GET
 	@BadRequestId(message = "obtener la url del pago")
 	@Path("/obtenerUrlPago")
 	@Produces(APPLICATION_JSON)
-	public Response getUrlPagoConChequeo(@QueryParam("id") String id, @QueryParam("email") String email, @QueryParam("telefono") String telefono, @QueryParam("nombre") String nombre) throws MPException, NotFoundException, BadRequestException, NumberFormatException, UnsupportedEncodingException {
-		String urlPago = getUrlPago(Integer.valueOf(id), email, telefono, nombre);
+	public Response getUrlPagoConChequeo(@QueryParam("id") String id, @QueryParam("email") String email, @QueryParam("telefono") String telefono, @QueryParam("nombre") String nombre) throws MPException, NotFoundException, BadRequestException, NumberFormatException, UnsupportedEncodingException, ProductoInexistenteException {
+		String urlPago = mercadoPagoService.getPaymentUrl(id, email, telefono, nombre);
 		return ok(json -> json.add("urlPago", urlPago));
 	}
 	

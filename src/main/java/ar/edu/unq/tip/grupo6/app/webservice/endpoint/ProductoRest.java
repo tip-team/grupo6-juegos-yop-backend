@@ -1,7 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,10 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
@@ -45,6 +42,7 @@ public class ProductoRest extends Rest {
 	}
 	
 	@GET
+	@BadRequestId(message = "obtener un producto")
 	@Path("/productos/{id}")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
@@ -53,6 +51,7 @@ public class ProductoRest extends Rest {
 	}
 
 	@GET
+	@BadRequestId(message = "obtener la descripción de un producto")
 	@Path("/productos/desc/{id}")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
@@ -74,12 +73,8 @@ public class ProductoRest extends Rest {
 	@BadRequestId(message = "eliminar un producto")
 	@Path("/productos/{id}")
 	@Produces(APPLICATION_JSON)
-	public Response borrarProducto(@PathParam("id") String id) throws BadRequestException {
-		try {
-			productoService.borrarProducto(Integer.valueOf(id));
-		} catch (ProductoInexistenteException exception) {
-			badRequest(exception.getMessage());
-		}
+	public Response borrarProducto(@PathParam("id") String id) throws BadRequestException, ProductoInexistenteException {
+		productoService.borrarProducto(id);
 		return ok();
 	}
 	

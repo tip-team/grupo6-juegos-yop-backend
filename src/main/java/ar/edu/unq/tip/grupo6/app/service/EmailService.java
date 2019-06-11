@@ -1,8 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.concurrent.CompletableFuture;
-
-import com.sendgrid.Response;
 import org.springframework.stereotype.Component;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -31,7 +29,7 @@ public class EmailService {
 
 	@SneakyThrows
 	private void sendEmail(SendGrid sendgrid, Request request) {
-		Response response = sendgrid.api(request);
+		sendgrid.api(request);
 	}
 
 	@SneakyThrows

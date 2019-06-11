@@ -1,10 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,12 +16,7 @@ public class ProductoService {
 	private ProductoRepository productoRepository;
 
 	public List<Producto> getProductos() {
-		return productoRepository.findAll();
-	}
-
-	public List<Producto> getProducto(Producto producto) {
-		Optional<Producto> productoFounded = productoRepository.findById(producto.getId());
-		return Arrays.asList(productoFounded.get());
+		return productoRepository.findAllByOrderByPrioridadAsc();
 	}
 
 	public Integer createProducto(@Valid Producto producto) {
@@ -37,27 +28,21 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 
-	public void borrarProducto(Integer id) throws ProductoInexistenteException {
+	public void borrarProducto(String id) throws ProductoInexistenteException {
 		try {
-			productoRepository.deleteById(id);
+			productoRepository.deleteById(Integer.valueOf(id));
 		} catch (EmptyResultDataAccessException exception) {
-			throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
+			throw new ProductoInexistenteException(id);
 		}
 	}
-
+	
 	public Producto getProducto(String id) throws ProductoInexistenteException {
-		Optional<Producto> productoFounded = productoRepository.findById(Integer.valueOf(id));
-		if (productoFounded.isPresent()) {
-			return productoFounded.get();
-		}
-		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
+		return productoRepository.findById(Integer.valueOf(id)).orElseThrow(
+				() -> new ProductoInexistenteException(id));
 	}
 
 	public String getProductoDesc(String id) throws ProductoInexistenteException {
-		Optional<Producto> productoFounded = productoRepository.findById(Integer.valueOf(id));
-		if (productoFounded.isPresent()) {
-			return productoFounded.get().getImagenDesc();
-		}
-		throw new ProductoInexistenteException("Producto con id '" + id + "' inexistente.");
+		return getProducto(id).getImagenDesc();
 	}
+	
 }

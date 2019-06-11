@@ -10,6 +10,7 @@ import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.BadRequestException
 import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.ConstraintViolationExceptionHandler;
 import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.InvalidParameterExceptionHandler;
 import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.NotFoundExceptionHandler;
+import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.ProductoInexistenteExceptionHandler;
 import ar.edu.unq.tip.grupo6.app.webservice.exceptionhandler.ServerExceptionHandler;
 
 @Component
@@ -32,6 +33,7 @@ public class Configuration extends ResourceConfig {
 		register(NotFoundExceptionHandler.class);
 		register(ConstraintViolationExceptionHandler.class);
 		register(InvalidParameterExceptionHandler.class);
+		register(ProductoInexistenteExceptionHandler.class);
 	}
 
 }
