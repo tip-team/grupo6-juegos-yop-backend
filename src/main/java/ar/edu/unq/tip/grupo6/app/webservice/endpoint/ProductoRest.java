@@ -1,6 +1,9 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
+import ar.edu.unq.tip.grupo6.app.service.dto.ProductoPriorityDTO;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 import ar.edu.unq.tip.grupo6.app.webservice.annotation.BadRequestId;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
@@ -66,6 +70,15 @@ public class ProductoRest extends Rest {
 	@Produces(APPLICATION_JSON)
 	public Response updateProducto(Producto producto) {
 		productoService.updateProducto(producto);
+		return ok();
+	}
+	
+	@PUT
+	@Path("/productos/order")
+	@Consumes(APPLICATION_JSON)
+	@Produces(APPLICATION_JSON)
+	public Response updateProductos(List<ProductoPriorityDTO> prioridades) {
+		productoService.updatePrioridades(prioridades);
 		return ok();
 	}
 	

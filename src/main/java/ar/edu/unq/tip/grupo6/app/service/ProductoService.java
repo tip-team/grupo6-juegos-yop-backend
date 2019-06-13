@@ -1,12 +1,15 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.repository.ProductoRepository;
+import ar.edu.unq.tip.grupo6.app.service.dto.ProductoPriorityDTO;
 import ar.edu.unq.tip.grupo6.app.service.exception.ProductoInexistenteException;
 
 @Component
@@ -43,6 +46,11 @@ public class ProductoService {
 
 	public String getProductoDesc(String id) throws ProductoInexistenteException {
 		return getProducto(id).getImagenDesc();
+	}
+	
+	@Transactional
+	public void updatePrioridades(List<ProductoPriorityDTO> prioridades) {
+		prioridades.forEach(prioridad -> productoRepository.updatePrioridad(prioridad.getIdProducto(), prioridad.getPrioridad()));
 	}
 	
 }
