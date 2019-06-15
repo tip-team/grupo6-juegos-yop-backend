@@ -18,5 +18,15 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 	@Modifying
 	@Query("UPDATE Producto producto SET producto.prioridad = :prioridad WHERE producto.id = :id")
 	void updatePrioridad(@Param("id") Integer id, @Param("prioridad") Integer prioridad);
+	
+	@Modifying
+	@Query("UPDATE Producto producto SET producto.nombre = :nombre, "
+			+ "producto.precio = :precio, "
+			+ "producto.imagen = :imagen, "
+			+ "producto.imagenDesc = :imagenDesc, "
+			+ "producto.habilitado = :habilitado WHERE producto.id = :id")
+	void updateProducto(@Param("id") Integer id, @Param("nombre") String nombre, 
+			@Param("precio") Float precio, @Param("imagen") String imagen, 
+			@Param("imagenDesc") String imagenDesc, @Param("habilitado") Boolean habilitado);
 
 }
