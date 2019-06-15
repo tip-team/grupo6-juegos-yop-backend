@@ -43,6 +43,10 @@ public class ProductoService {
 		}
 	}
 	
+	public String getImagen(Integer id) {
+		return productoRepository.getImagen(id);
+	}
+	
 	public Producto getProducto(String id) throws ProductoInexistenteException {
 		return productoRepository.findById(Integer.valueOf(id)).orElseThrow(
 				() -> new ProductoInexistenteException(id));

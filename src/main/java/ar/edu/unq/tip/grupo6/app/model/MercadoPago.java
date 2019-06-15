@@ -37,6 +37,7 @@ public class MercadoPago {
 		return new Item()
 				.setId(id)
 				.setTitle(StringUtil.encodeText(nombreProducto))
+				.setPictureUrl("https://tip-juegos-yop-backend.herokuapp.com/api/productos/imagen/" + id)
 				.setQuantity(1)
 				.setUnitPrice(precioProducto);
 	}
