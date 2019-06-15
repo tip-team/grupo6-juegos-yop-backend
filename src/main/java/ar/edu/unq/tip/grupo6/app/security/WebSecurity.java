@@ -1,9 +1,7 @@
 package ar.edu.unq.tip.grupo6.app.security;
 
 import static ar.edu.unq.tip.grupo6.app.security.Constants.*;
-
 import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -37,13 +35,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		JWTAuthorizationFilter authorizationFilter = new JWTAuthorizationFilter(authenticationManager());
 		JWTAuthenticationFilter authenticationFilter = new JWTAuthenticationFilter(authenticationManager());
 		authenticationFilter.setFilterProcessesUrl(AUTH_URL);
-		/*
-		 * 1. Se desactiva el uso de cookies
-		 * 2. Se activa la configuración CORS con los valores por defecto
-		 * 3. Se desactiva el filtro CSRF
-		 * 4. Se indica que el get productos no requiere autenticación
-		 * 5. Se indica que el resto de URLs esten securizadas
-		 */
 		httpSecurity
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.cors().and()
@@ -60,7 +51,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// Se define la clase que recupera los usuarios y el algoritmo para procesar las passwords
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 

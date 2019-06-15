@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import io.jsonwebtoken.Jwts;
+import static ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader.JUEGOS_YOP_SECRET_TOKEN;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -27,26 +28,21 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			chain.doFilter(req, res);
 			return;
 		}
-		UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		SecurityContextHolder.getContext().setAuthentication(getAuthentication(req));
 		chain.doFilter(req, res);
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader(HEADER_AUTHORIZACION_KEY);
 		if (token != null) {
-			// Se procesa el token y se recupera el usuario.
 			String user = Jwts.parser()
-						.setSigningKey(SUPER_SECRET_KEY)
+						.setSigningKey(JUEGOS_YOP_SECRET_TOKEN)
 						.parseClaimsJws(token.replace(TOKEN_BEARER_PREFIX, ""))
 						.getBody()
 						.getSubject();
-
-			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-			}
-			return null;
+			return user == null ? null : new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
 		}
 		return null;
 	}
+	
 }

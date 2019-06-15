@@ -5,6 +5,7 @@ import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import static javax.ws.rs.core.Response.Status.*;
 
 public class RestUtils {
 	
@@ -27,15 +28,15 @@ public class RestUtils {
 	}
 	
 	public static Response badRequest(String mensaje) {
-		return getResponse(Status.BAD_REQUEST, mensaje);
+		return getResponse(BAD_REQUEST, mensaje);
 	}
 	
 	public static Response notFound(String mensaje) {
-		return getResponse(Status.NOT_FOUND, mensaje);
+		return getResponse(NOT_FOUND, mensaje);
 	}
 	
 	public static Response internalServerError(String mensaje) {
-		return getResponse(Status.INTERNAL_SERVER_ERROR, mensaje);
+		return getResponse(INTERNAL_SERVER_ERROR, mensaje);
 	}
 	
 }

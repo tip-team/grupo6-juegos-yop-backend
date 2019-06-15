@@ -6,7 +6,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils;
+import static ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils.internalServerError;
 
 @Provider
 public class ServerExceptionHandler extends RestExceptionHandler implements ExceptionMapper<Exception> {
@@ -21,7 +21,7 @@ public class ServerExceptionHandler extends RestExceptionHandler implements Exce
 			return webApplicationException.getResponse();
 		}
 		logError(logger, exception);
-		return RestUtils.internalServerError("Hubo en error al invocar el servicio.");
+		return internalServerError("Hubo en error al invocar el servicio.");
 	}
 	
 }

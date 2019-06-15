@@ -1,6 +1,7 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import static java.util.Collections.emptyList;
+import java.util.Optional;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +19,8 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByUsername(username);
-		if (usuario == null) {
-			throw new UsernameNotFoundException(username);
-		}
+		Usuario usuario = Optional.ofNullable(usuarioRepository.findByUsername(username)).orElseThrow(() -> new UsernameNotFoundException(username));
 		return new User(usuario.getUsername(), usuario.getPassword(), emptyList());
 	}
-	
+
 }

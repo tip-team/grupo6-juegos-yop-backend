@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.BadRequestException;
-import ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils;
+import static ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils.badRequest;
 
 @Provider
 public class BadRequestExceptionHandler extends RestExceptionHandler implements ExceptionMapper<BadRequestException> {
@@ -12,7 +12,7 @@ public class BadRequestExceptionHandler extends RestExceptionHandler implements 
 	@Override
 	public Response toResponse(BadRequestException badRequest) {
 		logError(badRequest.getLogger(), badRequest);
-		return RestUtils.badRequest(badRequest.getMessage());
+		return badRequest(badRequest.getMessage());
 	}
 	
 }

@@ -7,55 +7,21 @@ public class StringUtil {
 	}
 	
 	private static String changeCharEncoding(char character) {
-		if (character == 'á') {
-			return "&aacute;";
+		switch (character) {
+		 case 'á': return "&aacute;";
+		 case 'Á': return "&Aacute;";
+		 case 'é': return "&eacute;";
+		 case 'É': return "&Eacute;";
+		 case 'í': return "&iacute;";
+		 case 'Í': return "&Iacute;";
+		 case 'ó': return "&oacute;";
+		 case 'Ó': return "&Oacute;";
+		 case 'ú': return "&uacute;";
+		 case 'Ú': return "&Úacute;";
+		 case 'ñ': return "&ntilde;";
+		 case 'Ñ': return "&Ntilde;";
+		 default: return String.valueOf(character);
 		}
-		
-		if (character == 'é') {
-			return "&eacute;";
-		}
-		
-		if (character == 'í') {
-			return "&iacute;";
-		}
-		
-		if (character == 'ó') {
-			return "&oacute;";
-		}
-		
-		if (character == 'ú') {
-			return "&uacute;";
-		}
-		
-		if (character == 'ñ') {
-			return "&ntilde;";
-		}
-		
-		if (character == 'Á') {
-			return "&Aacute;";
-		}
-		
-		if (character == 'É') {
-			return "&Eacute;";
-		}
-		
-		if (character == 'Í') {
-			return "&Iacute;";
-		}
-		
-		if (character == 'Ó') {
-			return "&Oacute;";
-		}
-		
-		if (character == 'Ú') {
-			return "&Úacute;";
-		}
-		
-		if (character == 'Ñ') {
-			return "&Ntilde;";
-		}
-		
-		return String.valueOf(character);
 	}
 	
 }

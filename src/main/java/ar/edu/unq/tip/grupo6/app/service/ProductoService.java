@@ -1,7 +1,6 @@
 package ar.edu.unq.tip.grupo6.app.service;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,12 @@ public class ProductoService {
 
 	public void updateProducto(@Valid Producto producto) {
 		Validator.validate(producto);
-		productoRepository.save(producto);
+		productoRepository.updateProducto(producto.getId(), 
+				producto.getNombre(), 
+				producto.getPrecio(),
+				producto.getImagen(), 
+				producto.getImagenDesc(), 
+				producto.getHabilitado());
 	}
 
 	public void borrarProducto(String id) throws ProductoInexistenteException {
