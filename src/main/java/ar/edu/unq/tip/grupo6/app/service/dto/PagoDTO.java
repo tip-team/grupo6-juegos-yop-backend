@@ -3,22 +3,29 @@ package ar.edu.unq.tip.grupo6.app.service.dto;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
 import ar.edu.unq.tip.grupo6.app.model.Pago;
 import lombok.Getter;
 
 @Getter
 public class PagoDTO {
 
-	String idCompra;
-	String nombreProducto;
-	Float monto;
-	Float montoRecibido;
-	String estadoDePago;
-	String fecha;
-	String email;
-	String telefono;
-	String nombre;
+	private String idCompra;
+	
+	private String nombreProducto;
+	
+	private Float monto;
+	
+	private Float montoRecibido;
+	
+	private String estadoDePago;
+	
+	private String fecha;
+	
+	private String email;
+	
+	private String telefono;
+	
+	private String nombre;
 
 	public PagoDTO(Pago pago) {
 		this.idCompra = pago.getIdCompra();

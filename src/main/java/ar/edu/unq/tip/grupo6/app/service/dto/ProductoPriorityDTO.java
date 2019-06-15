@@ -6,6 +6,7 @@ import lombok.Getter;
 public class ProductoPriorityDTO {
 	
 	private Integer idProducto;
+	
 	private Integer prioridad;
 
 }

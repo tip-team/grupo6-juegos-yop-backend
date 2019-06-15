@@ -33,7 +33,6 @@ public class MercadoPagoRest extends Rest {
 	
 	public MercadoPagoRest() throws MPConfException {
 		super();
-		// Se configura la SDK para poder interactuar con Mercado Pago.
 		MercadoPago.SDK.setAccessToken(ConfigurationLoader.MERCADO_PAGO_ACCESS_TOKEN);
 	}
 	
@@ -55,7 +54,6 @@ public class MercadoPagoRest extends Rest {
 			String idString = Optional.ofNullable(dataId).orElse(id);
 			try {
 				mercadoPagoService.savePayment(idString);
-				logger.info("Entro a la notificacion con " + idString);
 			} catch (MPException e) {
 				lanzarExcepcionMercadoPago(new BadRequestException("El id de compra de Mercado Pago es inexistente.", logger));
 			}

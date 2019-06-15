@@ -1,6 +1,5 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
-import java.util.Optional;
 import java.util.function.Function;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.core.Response;
@@ -25,16 +24,6 @@ public abstract class Rest {
 	
 	protected Response ok(Function<JsonObjectBuilder, JsonObjectBuilder> agregarValores) {
 		return RestUtils.ok(agregarValores);
-	}
-	
-	protected <T> T throwNullException(T object, String message) throws BadRequestException {
-		return Optional.ofNullable(object).orElseThrow(() -> badRequestException(message));
-	}
-	
-	protected void throwNullOrEmptyException(String object, String message) throws BadRequestException {
-		if (throwNullException(object, message).isEmpty()) {
-			badRequest(message);
-		}
 	}
 	
 	protected BadRequestException badRequestException(String message) {

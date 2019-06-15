@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import ar.edu.unq.tip.grupo6.app.webservice.exception.NotFoundException;
-import ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils;
+import static ar.edu.unq.tip.grupo6.app.webservice.util.RestUtils.notFound;
 
 @Provider
 public class NotFoundExceptionHandler extends RestExceptionHandler implements ExceptionMapper<NotFoundException> {
@@ -12,7 +12,7 @@ public class NotFoundExceptionHandler extends RestExceptionHandler implements Ex
 	@Override
 	public Response toResponse(NotFoundException notFoundException) {
 		logError(notFoundException.getLogger(), notFoundException);
-		return RestUtils.notFound(notFoundException.getMessage());
+		return notFound(notFoundException.getMessage());
 	}
 	
 }
