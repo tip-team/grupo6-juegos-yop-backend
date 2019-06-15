@@ -14,15 +14,24 @@ import lombok.Setter;
 @Table(name = "pagos")
 public class Pago {
 	
-	@Id String idCompra;
-	String nombreProducto;
-	Float monto;
-	Float montoRecibido;
-	String estadoDePago;
-	ZonedDateTime fecha;
-	String email;
-	String telefono;
-	String nombre;
+	@Id 
+	private String idCompra;
+	
+	private String nombreProducto;
+	
+	private Float monto;
+	
+	private Float montoRecibido;
+	
+	private String estadoDePago;
+	
+	private ZonedDateTime fecha;
+	
+	private String email;
+	
+	private String telefono;
+	
+	private String nombre;
 	
 	public Pago(String idCompra, String nombreProducto, Float monto, Float montoRecibido, String estadoDePago, String email, String telefono, String nombre) {
 		this.idCompra = idCompra;
