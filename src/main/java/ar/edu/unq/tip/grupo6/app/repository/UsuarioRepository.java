@@ -6,5 +6,7 @@ import ar.edu.unq.tip.grupo6.app.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	
 	Usuario findByUsername(String username);
+
 }
