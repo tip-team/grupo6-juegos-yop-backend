@@ -36,7 +36,7 @@ public class ProductoRest extends Rest {
 	
 	@GET
 	@Path("/productos/imagen/{id}")
-	@Produces(APPLICATION_JSON)
+	@Produces("image/jpeg")
 	public Response getImagen(@PathParam("id") Integer id) {
 		return ok(productoService.getImagen(id));
 	}
