@@ -16,7 +16,7 @@ import static ar.edu.unq.tip.grupo6.app.util.ConfigurationLoader.*;
 public class MercadoPago {
 	
 	public static String getPaymentUrl(String nombreProducto, Float precioProducto, IntencionDePago intencionDePago) throws MPException, UnsupportedEncodingException {
-		Preference preference = (new Preference())
+		Preference preference = new Preference()
 				.setPayer(createPayer(intencionDePago))
 				.appendItem(createItem(intencionDePago.getId(), nombreProducto, precioProducto))
 				.setBackUrls((new BackUrls()).setSuccess(JUEGOS_YOP_FRONTEND_HOME))
