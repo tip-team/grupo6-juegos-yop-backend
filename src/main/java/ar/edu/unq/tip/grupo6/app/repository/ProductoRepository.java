@@ -15,6 +15,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 	@Transactional
 	List<Producto> findAllByOrderByPrioridadAsc();
 	
+	@Transactional
+	@Query("SELECT producto.imagen FROM Producto producto WHERE producto.id = :id")
+	String getImagen(@Param("id") Integer id);
+	
 	@Modifying
 	@Query("UPDATE Producto producto SET producto.prioridad = :prioridad WHERE producto.id = :id")
 	void updatePrioridad(@Param("id") Integer id, @Param("prioridad") Integer prioridad);

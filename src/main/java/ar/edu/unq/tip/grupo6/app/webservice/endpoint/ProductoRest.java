@@ -34,6 +34,13 @@ public class ProductoRest extends Rest {
 		return ok(productoService.getProductos());
 	}
 	
+	@GET
+	@Path("/productos/imagen/{id}")
+	@Produces(APPLICATION_JSON)
+	public Response getImagen(@PathParam("id") Integer id) {
+		return ok(productoService.getImagen(id));
+	}
+	
 	@POST
 	@Path("/productos")
 	@Consumes(APPLICATION_JSON)
