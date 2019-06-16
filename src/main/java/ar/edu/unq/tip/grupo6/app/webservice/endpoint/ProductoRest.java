@@ -1,6 +1,9 @@
 package ar.edu.unq.tip.grupo6.app.webservice.endpoint;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,7 +14,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import ar.edu.unq.tip.grupo6.app.model.Producto;
 import ar.edu.unq.tip.grupo6.app.service.ProductoService;
@@ -36,9 +42,11 @@ public class ProductoRest extends Rest {
 	
 	@GET
 	@Path("/productos/imagen/{id}")
-	@Produces("image/jpeg")
+	@Produces(MediaType.IMAGE_JPEG_VALUE)
 	public Response getImagen(@PathParam("id") Integer id) {
-		return ok(productoService.getImagen(id));
+		String imageDataBytes = productoService.getImagen(id).substring(productoService.getImagen(id).indexOf(",")+1);
+		InputStream stream = new ByteArrayInputStream(Base64.decodeBase64(imageDataBytes.getBytes()));
+		return ok(stream);
 	}
 	
 	@POST
