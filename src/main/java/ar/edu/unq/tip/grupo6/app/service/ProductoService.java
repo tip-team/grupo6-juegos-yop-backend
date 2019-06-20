@@ -53,7 +53,7 @@ public class ProductoService {
 	}
 
 	public String getProductoDesc(String id) throws ProductoInexistenteException {
-		return getProducto(id).getImagenDesc();
+		return productoRepository.getImagenDesc(id); 
 	}
 	
 	@Transactional
