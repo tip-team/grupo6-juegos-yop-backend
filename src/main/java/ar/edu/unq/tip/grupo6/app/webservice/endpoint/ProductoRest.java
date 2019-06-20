@@ -59,20 +59,11 @@ public class ProductoRest extends Rest {
 	}
 	
 	@GET
-	@BadRequestId(message = "obtener un producto")
-	@Path("/productos/{id}")
-	@Consumes(APPLICATION_JSON)
-	@Produces(APPLICATION_JSON)
-	public Response getProducto(@PathParam("id") String id) throws ProductoInexistenteException {
-		return ok(productoService.getProducto(id));
-	}
-
-	@GET
 	@BadRequestId(message = "obtener la descripción de un producto")
 	@Path("/productos/desc/{id}")
 	@Consumes(APPLICATION_JSON)
 	@Produces(APPLICATION_JSON)
-	public Response getProductoDesc(@PathParam("id") String id) throws ProductoInexistenteException {
+	public Response getProductoDesc(@PathParam("id") Integer id) throws ProductoInexistenteException {
 		String imagen = productoService.getProductoDesc(id);
 		return ok(json -> json.add("imagenDesc", imagen));
 	}
